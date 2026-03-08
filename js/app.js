@@ -176,7 +176,10 @@ main.appendChild(div);
 });
 
 }
+let selectedDistrict = null;
 function openMarket(district){
+
+selectedDistrict = district;
 
 const main = document.getElementById("main");
 
