@@ -40,3 +40,40 @@ content.innerHTML = `
 <br>
 <b>Username:</b> @${user.username || "нет username"}
 `;
+let savedCity = localStorage.getItem("city");
+
+if(!savedCity){
+
+showCitySelector();
+
+}else{
+
+content.innerHTML += `<br><br><b>Ваш город:</b> ${savedCity}`;
+
+}
+
+function showCitySelector(){
+
+let html = `<h3>Выберите город</h3>`;
+
+cities.forEach(city => {
+
+html += `
+<div class="city-btn" onclick="selectCity('${city.name}')">
+${city.name}
+</div>
+`;
+
+});
+
+content.innerHTML = html;
+
+}
+
+function selectCity(city){
+
+localStorage.setItem("city", city);
+
+location.reload();
+
+}
