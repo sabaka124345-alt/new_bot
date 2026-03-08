@@ -63,6 +63,15 @@ city.toLowerCase().includes(value)
 
 renderCities(filtered);
 
+// если совпадение точное — выбрать город автоматически
+const exact = cities.find(city =>
+city.toLowerCase() === value
+);
+
+if(exact){
+selectedCity = exact;
+}
+
 });
 
 function enterMarket(){
