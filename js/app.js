@@ -18,7 +18,7 @@ let cities = [];
 
 async function loadCities(){
 
-const res = await fetch("/data/cities.json");
+const res = await fetch("/new_bot/data/cities.json");
 
 const data = await res.json();
 
@@ -30,14 +30,14 @@ renderCities(cities);
 
 async function loadDistricts(){
 
-const res = await fetch("/new_bot/data/cities.json")
+const res = await fetch("/new_bot/data/districts.json");
 
 districts = await res.json();
 
 }
 async function loadProducts(){
 
-const res = await fetch("/data/products.json");
+const res = await fetch("/new_bot/data/products.json");
 
 products = await res.json();
 
