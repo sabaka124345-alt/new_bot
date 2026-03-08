@@ -3,18 +3,19 @@ const tg = window.Telegram.WebApp;
 tg.ready();
 tg.expand();
 
-let cities = [
-"Москва",
-"Санкт-Петербург",
-"Казань",
-"Екатеринбург",
-"Новосибирск",
-"Краснодар",
-"Ростов-на-Дону",
-"Омск",
-"Самара",
-"Челябинск"
-];
+let cities = [];
+
+async function loadCities(){
+
+const res = await fetch("/data/cities.json");
+
+const data = await res.json();
+
+cities = data.map(c => c.name);
+
+}
+
+loadCities();
 
 let selectedCity = null;
 
