@@ -6,7 +6,13 @@ console.log("Mini App started");
 
 const user = tg.initDataUnsafe.user;
 
-if(user){
-console.log("User ID:", user.id);
-console.log("Username:", user.username);
+if (user) {
+
+    console.log("User ID:", user.id);
+    console.log("Username:", user.username);
+
+} else {
+
+    console.log("Mini App opened outside Telegram");
+
 }
