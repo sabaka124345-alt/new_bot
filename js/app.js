@@ -1,3 +1,11 @@
+const SUPABASE_URL = "https://ljqycvohgmasrnflydry.supabase.co";
+
+const SUPABASE_KEY = "sb_publishable_DF3XGrGMjKQYJPT0rx3Zaw_vTm_rjsD";
+
+const supabase = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
 let cart = [];
 let products = {};
 let districts = {};
