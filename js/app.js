@@ -44,9 +44,7 @@ products = await res.json();
 }
 
 loadProducts();
-
 loadDistricts();
-
 loadCities();
 
 let selectedCity = null;
