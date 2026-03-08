@@ -93,31 +93,32 @@ function openCategory(name){
   });
 }
 
-// Карточка товара
 function openProduct(categoryId, productId){
-  const category = products[categoryId];
-  const product = category.find(p => p.id === productId);
-  const content = document.getElementById("content");
+    const category = categories.find(c => c.id === categoryId);
+    const product = category.products.find(p => p.id === productId);
+    const content = document.getElementById("content");
 
-  let html = `
-    <h2>${product.name}</h2>
-    <p>${product.description}</p>
-    <h3>Выберите фасовку</h3>
-  `;
+    let html = `
+        <h2>${product.name}</h2>
+        <p>${product.description}</p>
+        <h3>Выберите фасовку</h3>
+    `;
 
-  product.weights.forEach(w => {
-    html += `<div class="weight" onclick="selectWeight(${w.weight}, ${w.price})">${w.weight} г — ${w.price} ₽</div>`;
-  });
+    product.weights.forEach(w => {
+        html += `
+            <div class="weight" onclick="selectWeight(${w.weight}, ${w.price})">
+                ${w.weight} г — ${w.price} ₽
+            </div>
+        `;
+    });
 
-  html += `
-    <button class="district-btn" onclick="toggleDistricts()">Выбрать район</button>
-    <div id="district-list" class="hidden">
-      ${renderDistricts(product.districts)}
-    </div>
-    <button onclick="addToCart('${product.id}')">Добавить в корзину</button>
-  `;
+    html += `
+        <button class="district-btn" onclick="toggleDistricts('${productId}')">Выбрать район</button>
+        <div id="district-list-${productId}" class="hidden"></div>
+        <button onclick="addToCart('${productId}')">Добавить в корзину</button>
+    `;
 
-  content.innerHTML = html;
+    content.innerHTML = html;
 }
 
 // Рендер районов с emoji
@@ -200,4 +201,31 @@ function openCart(){
 
   html += `<h3>Итого: ${total} ₽</h3><button class="buy-btn">Оформить заказ</button>`;
   content.innerHTML = html;
+}
+function toggleDistricts(productId){
+    const product = findProductById(productId); // вспомогательная функция ниже
+    const el = document.getElementById(`district-list-${productId}`);
+    
+    if(el.classList.contains("hidden")){
+        el.classList.remove("hidden");
+        el.innerHTML = "";
+        product.districts.forEach(d => {
+            el.innerHTML += `
+                <div class="district ${d.type === '❌' ? 'disabled' : ''}" 
+                     onclick="selectDistrict('${d.name}','${d.type}')">
+                     ${d.name} ${d.type}
+                </div>
+            `;
+        });
+    } else {
+        el.classList.add("hidden");
+    }
+}
+
+function findProductById(productId){
+    for(const cat of categories){
+        const p = cat.products.find(x => x.id === productId);
+        if(p) return p;
+    }
+    return null;
 }
