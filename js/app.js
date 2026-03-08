@@ -333,7 +333,17 @@ function openCheckout(){
 
 const main = document.getElementById("main");
 
-main.innerHTML = "<h2>Оформление заказа</h2><p>Проверьте заказ перед оплатой</p>";
+main.innerHTML = `
+<button id="backBtn">← Назад</button>
+
+<h2>Оформление заказа</h2>
+<p>Проверьте заказ перед оплатой</p>
+`;
+  document.getElementById("backBtn").onclick = () => {
+
+openCart();
+
+};
 
 let total = 0;
 
@@ -362,6 +372,24 @@ totalDiv.innerHTML = `<h3>Итого: ${total}₽</h3>`;
 main.appendChild(totalDiv);
 
 const payBtn = document.createElement("button");
+  const clearBtn = document.createElement("button");
+
+clearBtn.innerText = "Очистить корзину";
+
+clearBtn.style.padding = "12px";
+clearBtn.style.margin = "10px";
+clearBtn.style.background = "#111";
+clearBtn.style.color = "#fff";
+clearBtn.style.border = "1px solid #333";
+clearBtn.style.cursor = "pointer";
+
+clearBtn.onclick = () => {
+
+cart = [];
+
+openCart();
+
+};
 
 payBtn.innerText = "Перейти к оплате";
 
@@ -379,5 +407,6 @@ alert("Оплата будет подключена позже");
 };
 
 main.appendChild(payBtn);
+  main.appendChild(clearBtn);
 
 }
