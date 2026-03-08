@@ -319,8 +319,47 @@ orderBtn.style.cursor = "pointer";
 
 orderBtn.onclick = () => {
 
+openCheckout();
+
+};
+
+main.appendChild(orderBtn);
+
+const orderBtn = document.createElement("button");
+
+orderBtn.innerText = "Оформить заказ";
+
+orderBtn.style.padding = "12px";
+orderBtn.style.margin = "20px";
+orderBtn.style.background = "#222";
+orderBtn.style.color = "#fff";
+orderBtn.style.border = "1px solid #333";
+orderBtn.style.cursor = "pointer";
+
+orderBtn.onclick = () => {
+
 alert("Переход к оплате");
 
 };
 
 main.appendChild(orderBtn);
+
+function openCheckout(){
+
+const main = document.getElementById("main");
+
+main.innerHTML = `
+<h2>Оформление заказа</h2>
+
+<p>Проверьте заказ перед оплатой</p>
+
+<button id="payBtn">Перейти к оплате</button>
+`;
+
+document.getElementById("payBtn").onclick = () => {
+
+alert("Оплата будет подключена позже");
+
+};
+
+}
