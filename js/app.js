@@ -77,3 +77,22 @@ localStorage.setItem("city", city);
 location.reload();
 
 }
+function openPage(page){
+
+const content = document.getElementById("content");
+
+if(page === "catalog"){
+
+content.innerHTML = `
+<h2>Каталог</h2>
+
+<div class="category">⚗️ Лаборатория</div>
+<div class="category">🌌 Космос</div>
+<div class="category">🧬 Синтез</div>
+<div class="category">🧊 Кристаллы</div>
+<div class="category">🔥 Эксперименты</div>
+`;
+
+}
+
+}
