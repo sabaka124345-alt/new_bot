@@ -38,3 +38,26 @@ cursor:pointer;
 .city-btn:hover{
 border-color:#00ff9c;
 }
+.nav{
+display:flex;
+gap:14px;
+align-items:center;
+font-size:14px;
+}
+
+.nav-item{
+padding:6px 10px;
+border-radius:8px;
+cursor:pointer;
+color:#bbb;
+}
+
+.nav-item:hover{
+background:#1a1a1a;
+color:white;
+}
+
+.nav-item.active{
+background:#151515;
+color:#00ff9c;
+}
