@@ -139,28 +139,43 @@ content.innerHTML = `
 Чистый лабораторный кристалл высокой степени.
 </p>
 
+<button class="info-btn" onclick="openInfo()">
+Подробнее о товаре
+</button>
+
 <h3>Выберите фасовку</h3>
 
 <div class="weights">
 
-<div class="weight" onclick="selectWeight('0.5',1200)">
-0.5 г — 1200 ₽
-</div>
+<div class="weight" onclick="selectWeight('0.5',1200)">0.5 г</div>
 
-<div class="weight" onclick="selectWeight('1',2000)">
-1 г — 2000 ₽
-</div>
+<div class="weight" onclick="selectWeight('1',2000)">1 г</div>
 
-<div class="weight" onclick="selectWeight('2',3500)">
-2 г — 3500 ₽
-</div>
+<div class="weight" onclick="selectWeight('2',3500)">2 г</div>
+
+<div class="weight" onclick="selectWeight('3',4800)">3 г</div>
+
+<div class="weight" onclick="selectWeight('5',7000)">5 г</div>
 
 </div>
 
-<button class="buy-btn" onclick="addToCart()">Добавить в корзину</button>
+<button class="district-btn" onclick="openDistricts()">
+Выбрать район
+</button>
+
+<button class="buy-btn" onclick="addToCart()">
+Добавить в корзину
+</button>
+
 `;
 
 }
+function openInfo(){
+
+alert("Подробная информация о товаре");
+
+}
+
 function selectWeight(weight,price){
 
 selectedWeight = weight;
@@ -169,6 +184,38 @@ selectedPrice = price;
 alert("Вы выбрали "+weight+" г");
 
 }
+function openDistricts(){
+
+const content = document.getElementById("content");
+
+content.innerHTML = `
+<h2>Выберите район</h2>
+
+<div class="district" onclick="selectDistrict('Центр','⛏️')">
+Центр ⛏️
+</div>
+
+<div class="district" onclick="selectDistrict('Север','🧲')">
+Север 🧲
+</div>
+
+<div class="district" onclick="selectDistrict('Юг','🔒')">
+Юг 🔒
+</div>
+
+<div class="district disabled">
+Запад ❌
+</div>
+
+`;
+}
+
+function selectDistrict(name,type){
+
+alert("Вы выбрали район: "+name+" "+type);
+
+}
+
 function addToCart(){
 
 if(!selectedWeight){
