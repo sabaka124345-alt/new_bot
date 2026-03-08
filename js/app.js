@@ -196,3 +196,40 @@ cartCount.innerText = cart.length;
 }
 
 }
+function openCart(){
+
+const content = document.getElementById("content");
+
+if(cart.length === 0){
+content.innerHTML = "<h2>Корзина пуста</h2>";
+return;
+}
+
+let html = "<h2>Корзина</h2>";
+
+let total = 0;
+
+cart.forEach(item => {
+
+html += `
+<div class="product">
+<div class="product-title">${item.name} ${item.weight}г</div>
+<div class="product-price">${item.price} ₽</div>
+</div>
+`;
+
+total += item.price;
+
+});
+
+html += `
+<h3>Итого: ${total} ₽</h3>
+
+<button class="buy-btn">
+Оформить заказ
+</button>
+`;
+
+content.innerHTML = html;
+
+}
