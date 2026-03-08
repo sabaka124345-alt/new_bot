@@ -423,7 +423,7 @@ alert("Оплата будет подключена позже");
 
 };
 
+main.appendChild(clearBtn);
 main.appendChild(payBtn);
-  main.appendChild(clearBtn);
 
 }
