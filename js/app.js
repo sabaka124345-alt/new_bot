@@ -425,9 +425,39 @@ payBtn.style.color = "#fff";
 payBtn.style.border = "1px solid #333";
 payBtn.style.cursor = "pointer";
 
-payBtn.onclick = () => {
+payBtn.onclick = async () => {
 
-alert("Оплата будет подключена позже");
+const productsText = cart.map(p => p.name + " " + p.weight).join(", ");
+
+let total = 0;
+cart.forEach(item => {
+  total += parseInt(item.price);
+});
+
+const { data, error } = await supabase
+  .from("orders")
+  .insert([
+    {
+      telegram_id: tg.initDataUnsafe.user.id,
+      city: selectedCity,
+      district: selectedDistrict,
+      products: productsText,
+      total: total
+    }
+  ]);
+
+if(error){
+  alert("Ошибка при оформлении заказа");
+  console.log(error);
+  return;
+}
+
+cart = [];
+
+main.innerHTML = `
+<h2>Заказ оформлен</h2>
+<p>Наш оператор скоро свяжется с вами</p>
+`;
 
 };
 
