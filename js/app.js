@@ -96,7 +96,7 @@ return;
 document.getElementById("cityGate").style.display="none";
 document.getElementById("main").style.display="block";
 
-renderCategories();
+renderDistricts();
 
 }
 
@@ -124,5 +124,47 @@ div.style.border = "1px solid #333";
 main.appendChild(div);
 
 });
+
+}
+function renderDistricts(){
+
+const main = document.getElementById("main");
+
+const cityDistricts = districts[selectedCity] || [];
+
+main.innerHTML = `<h1>${selectedCity}</h1><h2>Районы</h2>`;
+
+cityDistricts.forEach(dist => {
+
+const div = document.createElement("div");
+
+div.innerText = dist;
+
+div.style.padding = "12px";
+div.style.margin = "10px";
+div.style.background = "#111";
+div.style.cursor = "pointer";
+div.style.border = "1px solid #333";
+
+div.onclick = () => {
+
+openMarket(dist);
+
+};
+
+main.appendChild(div);
+
+});
+
+}
+function openMarket(district){
+
+const main = document.getElementById("main");
+
+main.innerHTML = `
+<h1>${selectedCity}</h1>
+<h2>Район: ${district}</h2>
+<p>Маркет скоро загрузится</p>
+`;
 
 }
