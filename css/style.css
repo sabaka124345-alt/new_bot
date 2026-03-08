@@ -26,3 +26,15 @@ cursor:pointer;
 #content{
 padding:16px;
 }
+.city-btn{
+padding:12px;
+margin:8px 0;
+background:#151515;
+border:1px solid #333;
+border-radius:8px;
+cursor:pointer;
+}
+
+.city-btn:hover{
+border-color:#00ff9c;
+}
