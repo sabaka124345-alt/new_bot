@@ -1,6 +1,8 @@
 let selectedWeight = null;
 let selectedPrice = 0;
 
+let cart = [];
+
 const tg = window.Telegram.WebApp;
 
 tg.expand();
@@ -174,6 +176,23 @@ alert("Выберите фасовку");
 return;
 }
 
-alert("Добавлено в корзину: "+selectedWeight+" г");
+cart.push({
+name: "Blue Crystal",
+weight: selectedWeight,
+price: selectedPrice
+});
+
+updateCart();
+
+alert("Товар добавлен в корзину");
+
+}
+function updateCart(){
+
+const cartCount = document.getElementById("cartCount");
+
+if(cartCount){
+cartCount.innerText = cart.length;
+}
 
 }
