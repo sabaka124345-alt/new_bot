@@ -1,3 +1,4 @@
+let products = {};
 let districts = {};
 const tg = window.Telegram.WebApp;
 
@@ -23,6 +24,15 @@ const res = await fetch("/data/districts.json");
 districts = await res.json();
 
 }
+async function loadProducts(){
+
+const res = await fetch("/data/products.json");
+
+products = await res.json();
+
+}
+
+loadProducts();
 
 loadDistricts();
 
@@ -181,10 +191,43 @@ const div = document.createElement("div");
 
 div.innerText = cat;
 
+div.onclick = () => {
+
+openCategory(cat);
+
+};
+
 div.style.padding = "12px";
 div.style.margin = "10px";
 div.style.background = "#111";
 div.style.cursor = "pointer";
+div.style.border = "1px solid #333";
+
+main.appendChild(div);
+
+});
+
+}
+function openCategory(category){
+
+const main = document.getElementById("main");
+
+const items = products[category] || [];
+
+main.innerHTML = `<h2>${category}</h2>`;
+
+items.forEach(item => {
+
+const div = document.createElement("div");
+
+div.innerHTML = `
+<b>${item.name}</b><br>
+${item.weight} — ${item.price}
+`;
+
+div.style.padding = "12px";
+div.style.margin = "10px";
+div.style.background = "#111";
 div.style.border = "1px solid #333";
 
 main.appendChild(div);
