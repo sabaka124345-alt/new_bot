@@ -161,10 +161,34 @@ function openMarket(district){
 
 const main = document.getElementById("main");
 
+const categories = [
+"Стимуляторы",
+"Эйфория",
+"Психоделики",
+"Каннабис",
+"Диссоциативы"
+];
+
 main.innerHTML = `
 <h1>${selectedCity}</h1>
 <h2>Район: ${district}</h2>
-<p>Маркет скоро загрузится</p>
+<h3>Категории</h3>
 `;
+
+categories.forEach(cat => {
+
+const div = document.createElement("div");
+
+div.innerText = cat;
+
+div.style.padding = "12px";
+div.style.margin = "10px";
+div.style.background = "#111";
+div.style.cursor = "pointer";
+div.style.border = "1px solid #333";
+
+main.appendChild(div);
+
+});
 
 }
