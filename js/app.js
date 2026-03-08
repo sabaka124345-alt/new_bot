@@ -103,21 +103,43 @@ const content = document.getElementById("content");
 content.innerHTML = `
 <h2>Товары</h2>
 
-<div class="product">
+<div class="product" onclick="openProduct('blue')">
 <div class="product-title">Blue Crystal</div>
 <div class="product-price">1200 ₽</div>
 </div>
 
-<div class="product">
+<div class="product" onclick="openProduct('red')">
 <div class="product-title">Red Powder</div>
 <div class="product-price">950 ₽</div>
 </div>
 
-<div class="product">
+<div class="product" onclick="openProduct('dark')">
 <div class="product-title">Dark Matter</div>
 <div class="product-price">2100 ₽</div>
 </div>
-
 `;
 
+}
+
+function openProduct(name){
+
+const content = document.getElementById("content");
+
+content.innerHTML = `
+<h2>Blue Crystal</h2>
+
+<div class="rating">⭐⭐⭐⭐⭐</div>
+
+<p class="product-desc">
+Чистый лабораторный кристалл высокой степени.
+</p>
+
+<div class="weights">
+<div class="weight">0.5 г — 1200 ₽</div>
+<div class="weight">1 г — 2000 ₽</div>
+<div class="weight">2 г — 3500 ₽</div>
+</div>
+
+<button class="buy-btn">Добавить в корзину</button>
+`;
 }
