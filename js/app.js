@@ -278,6 +278,14 @@ openCart();
 }
 function openCart(){
 
+  if(cart.length === 0){
+
+main.innerHTML = "<h2>Корзина пустая</h2>";
+
+return;
+
+}
+
 const main = document.getElementById("main");
 
 main.innerHTML = "<h2>Корзина</h2>";
@@ -293,7 +301,16 @@ const div = document.createElement("div");
 div.innerHTML = `
 <b>${item.name}</b><br>
 ${item.weight} — ${item.price}
+<br>
+<button class="removeBtn">Удалить</button>
 `;
+  div.querySelector(".removeBtn").onclick = () => {
+
+cart = cart.filter(p => p.name !== item.name);
+
+openCart();
+
+};
 
 div.style.padding = "12px";
 div.style.margin = "10px";
