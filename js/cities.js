@@ -1,4 +1,3 @@
-const cities = [];
 const cities = [
 {
 name: "Москва",
