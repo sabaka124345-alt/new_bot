@@ -441,7 +441,7 @@ const { data, error } = await supabase
   .from("orders")
   .insert([
     {
-      telegram_id: tg.initDataUnsafe.user.id,
+      telegram_id: tg.initDataUnsafe?.user?.id || 0,
       city: selectedCity,
       district: selectedDistrict,
       products: productsText,
