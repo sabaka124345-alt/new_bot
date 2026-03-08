@@ -1,3 +1,4 @@
+let districts = {};
 const tg = window.Telegram.WebApp;
 
 tg.ready();
@@ -14,6 +15,16 @@ const data = await res.json();
 cities = data.map(c => c.name);
 
 }
+
+async function loadDistricts(){
+
+const res = await fetch("/data/districts.json");
+
+districts = await res.json();
+
+}
+
+loadDistricts();
 
 loadCities();
 
