@@ -18,6 +18,7 @@ let cities = [
 ];
 
 let selectedCity = null;
+renderCities(cities);
 
 function renderCities(list){
 
