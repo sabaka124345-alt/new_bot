@@ -280,3 +280,59 @@ html += `
 content.innerHTML = html;
 
 }
+function showCategories() {
+  const content = document.getElementById("content");
+  let html = `<h2>Категории</h2>`;
+
+  categories.forEach(cat => {
+    html += `
+      <div class="category" onclick="showProducts('${cat.id}')">
+        ${cat.name}
+      </div>
+    `;
+  });
+
+  content.innerHTML = html;
+}
+function showProducts(categoryId) {
+  const category = categories.find(c => c.id === categoryId);
+  const content = document.getElementById("content");
+
+  let html = `<h2>${category.name}</h2>`;
+
+  category.products.forEach(p => {
+    html += `
+      <div class="product" onclick="openProduct('${categoryId}','${p.id}')">
+        ${p.name}
+      </div>
+    `;
+  });
+
+  content.innerHTML = html;
+}
+function openProduct(categoryId, productId) {
+  const category = categories.find(c => c.id === categoryId);
+  const product = category.products.find(p => p.id === productId);
+  const content = document.getElementById("content");
+
+  let html = `
+    <h2>${product.name}</h2>
+    <p>${product.description}</p>
+    <h3>Выберите фасовку</h3>
+  `;
+
+  product.weights.forEach(w => {
+    html += `
+      <div class="weight" onclick="selectWeight(${w.weight}, ${w.price})">
+        ${w.weight} г — ${w.price} ₽
+      </div>
+    `;
+  });
+
+  html += `
+    <button onclick="showDistrictSelector()">Выбрать район</button>
+    <button onclick="addToCart('${product.id}')">Добавить в корзину</button>
+  `;
+
+  content.innerHTML = html;
+}
