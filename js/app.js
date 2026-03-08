@@ -88,15 +88,10 @@ renderCategories();
 
 }
 
-function renderCategories(){
+async function renderCategories(){
 
-const categories = [
-"Стимуляторы",
-"Эйфория",
-"Психоделики",
-"Каннабис",
-"Диссоциативы"
-];
+const res = await fetch("/data/categories.json");
+const categories = await res.json();
 
 const main = document.getElementById("main");
 
