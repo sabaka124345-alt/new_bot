@@ -1,10 +1,9 @@
 let selectedWeight = null;
 let selectedPrice = 0;
-
+let selectedDistrict = null;
 let cart = [];
 
 const tg = window.Telegram.WebApp;
-
 tg.expand();
 
 console.log("Mini App started");
@@ -12,307 +11,92 @@ console.log("Mini App started");
 const user = tg.initDataUnsafe.user;
 
 if (!user) {
-
-    document.body.innerHTML = `
+  document.body.innerHTML = `
     <div style="display:flex;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
-    background:#0f0f10;
-    color:white;
-    font-size:20px;">
-    Откройте магазин через Telegram
-    </div>
-    `;
-
-    throw new Error("Mini App opened outside Telegram");
-
+                justify-content:center;
+                align-items:center;
+                height:100vh;
+                background:#0f0f10;
+                color:white;
+                font-size:20px;">
+      Откройте магазин через Telegram
+    </div>`;
+  throw new Error("Mini App opened outside Telegram");
 }
 
 console.log("User ID:", user.id);
 console.log("Username:", user.username);
 
-// выводим пользователя на экран
 const content = document.getElementById("content");
-
-content.innerHTML = `
-<h2>Добро пожаловать</h2>
-<p>Mini App работает</p>
-
-<br>
-
-<b>Ваш Telegram ID:</b> ${user.id}
-<br>
-<b>Username:</b> @${user.username || "нет username"}
-`;
 let savedCity = localStorage.getItem("city");
 
 if(!savedCity){
-
-showCitySelector();
-
-}else{
-
-content.innerHTML += `<br><br><b>Ваш город:</b> ${savedCity}`;
-
+  showCitySelector();
+} else {
+  renderWelcome(savedCity);
 }
 
+// --- функции --- //
+
+function renderWelcome(city){
+  content.innerHTML = `
+    <h2>Добро пожаловать</h2>
+    <p>Mini App работает</p>
+    <br>
+    <b>Ваш Telegram ID:</b> ${user.id}<br>
+    <b>Username:</b> @${user.username || "нет username"}<br>
+    <b>Ваш город:</b> ${city}
+  `;
+}
+
+// Выбор города
 function showCitySelector(){
-
-let html = `<h3>Выберите город</h3>`;
-
-cities.forEach(city => {
-
-html += `
-<div class="city-btn" onclick="selectCity('${city.name}')">
-${city.name}
-</div>
-`;
-
-});
-
-content.innerHTML = html;
-
+  let html = `<h3>Выберите город</h3>`;
+  cities.forEach(city => {
+    html += `<div class="city-btn" onclick="selectCity('${city.name}')">${city.name}</div>`;
+  });
+  content.innerHTML = html;
 }
 
 function selectCity(city){
-
-localStorage.setItem("city", city);
-
-location.reload();
-
+  localStorage.setItem("city", city);
+  location.reload();
 }
+
+// Переход на страницу каталога
 function openPage(page){
-
-const content = document.getElementById("content");
-
-if(page === "catalog"){
-
-content.innerHTML = `
-<h2>Каталог</h2>
-
-<div class="category" onclick="openCategory('lab')">🔬 Лаборатория</div>
-<div class="category" onclick="openCategory('space')">🌌 Космос</div>
-<div class="category" onclick="openCategory('synthesis')">🧬 Синтез</div>
-<div class="category" onclick="openCategory('crystal')">🧊 Кристаллы</div>
-<div class="category" onclick="openCategory('exp')">🔥 Эксперименты</div>
-`;
-
+  if(page === "catalog"){
+    const content = document.getElementById("content");
+    content.innerHTML = `
+      <h2>Каталог</h2>
+      <div class="category" onclick="openCategory('lab')">🔬 Лаборатория</div>
+      <div class="category" onclick="openCategory('space')">🌌 Космос</div>
+      <div class="category" onclick="openCategory('synthesis')">🧬 Синтез</div>
+      <div class="category" onclick="openCategory('crystal')">🧊 Кристаллы</div>
+      <div class="category" onclick="openCategory('exp')">🔥 Эксперименты</div>
+    `;
+  }
 }
 
-}
+// Категории товаров
 function openCategory(name){
-
-const content = document.getElementById("content");
-
-content.innerHTML = `
-<h2>Товары</h2>
-
-<div class="product" onclick="openProduct('blue')">
-<div class="product-title">Blue Crystal</div>
-<div class="product-price">1200 ₽</div>
-</div>
-
-<div class="product" onclick="openProduct('red')">
-<div class="product-title">Red Powder</div>
-<div class="product-price">950 ₽</div>
-</div>
-
-<div class="product" onclick="openProduct('dark')">
-<div class="product-title">Dark Matter</div>
-<div class="product-price">2100 ₽</div>
-</div>
-`;
-
-}
-
-function openProduct(name){
-
-const content = document.getElementById("content");
-
-content.innerHTML = `
-<h2>Blue Crystal</h2>
-
-<div class="rating">⭐⭐⭐⭐⭐</div>
-
-<p class="product-desc">
-Чистый лабораторный кристалл высокой степени.
-</p>
-
-<button class="info-btn" onclick="openInfo()">
-Подробнее о товаре
-</button>
-
-<h3>Выберите фасовку</h3>
-
-<div class="weights">
-
-<div class="weight" onclick="selectWeight('0.5',1200)">0.5 г</div>
-
-<div class="weight" onclick="selectWeight('1',2000)">1 г</div>
-
-<div class="weight" onclick="selectWeight('2',3500)">2 г</div>
-
-<div class="weight" onclick="selectWeight('3',4800)">3 г</div>
-
-<div class="weight" onclick="selectWeight('5',7000)">5 г</div>
-
-</div>
-
-<button class="district-btn" onclick="openDistricts()">
-Выбрать район
-</button>
-
-<button class="buy-btn" onclick="addToCart()">
-Добавить в корзину
-</button>
-
-`;
-
-}
-function openInfo(){
-
-alert("Подробная информация о товаре");
-
-}
-
-function selectWeight(weight,price){
-
-selectedWeight = weight;
-selectedPrice = price;
-
-alert("Вы выбрали "+weight+" г");
-
-}
-function openDistricts(){
-
-const content = document.getElementById("content");
-
-content.innerHTML = `
-<h2>Выберите район</h2>
-
-<div class="district" onclick="selectDistrict('Центр','⛏️')">
-Центр ⛏️
-</div>
-
-<div class="district" onclick="selectDistrict('Север','🧲')">
-Север 🧲
-</div>
-
-<div class="district" onclick="selectDistrict('Юг','🔒')">
-Юг 🔒
-</div>
-
-<div class="district disabled">
-Запад ❌
-</div>
-
-`;
-}
-
-function selectDistrict(name,type){
-
-alert("Вы выбрали район: "+name+" "+type);
-
-}
-
-function addToCart(){
-
-if(!selectedWeight){
-alert("Выберите фасовку");
-return;
-}
-
-cart.push({
-name: "Blue Crystal",
-weight: selectedWeight,
-price: selectedPrice
-});
-
-updateCart();
-
-alert("Товар добавлен в корзину");
-
-}
-function updateCart(){
-
-const cartCount = document.getElementById("cartCount");
-
-if(cartCount){
-cartCount.innerText = cart.length;
-}
-
-}
-function openCart(){
-
-const content = document.getElementById("content");
-
-if(cart.length === 0){
-content.innerHTML = "<h2>Корзина пуста</h2>";
-return;
-}
-
-let html = "<h2>Корзина</h2>";
-
-let total = 0;
-
-cart.forEach(item => {
-
-html += `
-<div class="product">
-<div class="product-title">${item.name} ${item.weight}г</div>
-<div class="product-price">${item.price} ₽</div>
-</div>
-`;
-
-total += item.price;
-
-});
-
-html += `
-<h3>Итого: ${total} ₽</h3>
-
-<button class="buy-btn">
-Оформить заказ
-</button>
-`;
-
-content.innerHTML = html;
-
-}
-function showCategories() {
   const content = document.getElementById("content");
-  let html = `<h2>Категории</h2>`;
-
-  categories.forEach(cat => {
-    html += `
-      <div class="category" onclick="showProducts('${cat.id}')">
-        ${cat.name}
+  content.innerHTML = `<h2>Товары</h2>`;
+  const productsList = products[name]; // products — объект с категориями
+  productsList.forEach(p => {
+    content.innerHTML += `
+      <div class="product" onclick="openProduct('${name}','${p.id}')">
+        <div class="product-title">${p.name}</div>
+        <div class="product-price">${p.price} ₽</div>
       </div>
     `;
   });
-
-  content.innerHTML = html;
 }
-function showProducts(categoryId) {
-  const category = categories.find(c => c.id === categoryId);
-  const content = document.getElementById("content");
 
-  let html = `<h2>${category.name}</h2>`;
-
-  category.products.forEach(p => {
-    html += `
-      <div class="product" onclick="openProduct('${categoryId}','${p.id}')">
-        ${p.name}
-      </div>
-    `;
-  });
-
-  content.innerHTML = html;
-}
-function openProduct(categoryId, productId) {
-  const category = categories.find(c => c.id === categoryId);
-  const product = category.products.find(p => p.id === productId);
+// Карточка товара
+function openProduct(categoryId, productId){
+  const category = products[categoryId];
+  const product = category.find(p => p.id === productId);
   const content = document.getElementById("content");
 
   let html = `
@@ -322,17 +106,98 @@ function openProduct(categoryId, productId) {
   `;
 
   product.weights.forEach(w => {
-    html += `
-      <div class="weight" onclick="selectWeight(${w.weight}, ${w.price})">
-        ${w.weight} г — ${w.price} ₽
-      </div>
-    `;
+    html += `<div class="weight" onclick="selectWeight(${w.weight}, ${w.price})">${w.weight} г — ${w.price} ₽</div>`;
   });
 
   html += `
-    <button onclick="showDistrictSelector()">Выбрать район</button>
+    <button class="district-btn" onclick="toggleDistricts()">Выбрать район</button>
+    <div id="district-list" class="hidden">
+      ${renderDistricts(product.districts)}
+    </div>
     <button onclick="addToCart('${product.id}')">Добавить в корзину</button>
   `;
 
+  content.innerHTML = html;
+}
+
+// Рендер районов с emoji
+function renderDistricts(districts){
+  let html = "";
+  districts.forEach(d => {
+    if(d.available){
+      html += `<div class="district" onclick="selectDistrict('${d.name}','${d.type}')">${d.name} ${d.emoji}</div>`;
+    } else {
+      html += `<div class="district disabled">${d.name} ❌</div>`;
+    }
+  });
+  return html;
+}
+
+// Показ/скрытие районов
+function toggleDistricts(){
+  const list = document.getElementById("district-list");
+  list.classList.toggle("hidden");
+}
+
+// Выбор фасовки
+function selectWeight(weight, price){
+  selectedWeight = weight;
+  selectedPrice = price;
+  document.querySelectorAll(".weight").forEach(w => w.classList.remove("selected"));
+  event.target.classList.add("selected");
+}
+
+// Выбор района
+function selectDistrict(name,type){
+  selectedDistrict = {name,type};
+  document.querySelectorAll(".district").forEach(d => d.classList.remove("selected"));
+  event.target.classList.add("selected");
+}
+
+// Корзина
+function addToCart(productId){
+  if(!selectedWeight){
+    alert("Выберите фасовку");
+    return;
+  }
+  if(!selectedDistrict){
+    alert("Выберите район");
+    return;
+  }
+
+  const product = {id: productId, weight:selectedWeight, price:selectedPrice, district:selectedDistrict};
+  cart.push(product);
+  updateCart();
+  alert("Товар добавлен в корзину");
+}
+
+// Обновление корзины
+function updateCart(){
+  const cartCount = document.getElementById("cartCount");
+  if(cartCount) cartCount.innerText = cart.length;
+}
+
+// Открытие корзины
+function openCart(){
+  const content = document.getElementById("content");
+  if(cart.length === 0){
+    content.innerHTML = "<h2>Корзина пуста</h2>";
+    return;
+  }
+
+  let html = "<h2>Корзина</h2>";
+  let total = 0;
+
+  cart.forEach(item => {
+    html += `
+      <div class="product">
+        <div class="product-title">${item.id} ${item.weight}г — ${item.district.name} ${item.district.emoji}</div>
+        <div class="product-price">${item.price} ₽</div>
+      </div>
+    `;
+    total += item.price;
+  });
+
+  html += `<h3>Итого: ${total} ₽</h3><button class="buy-btn">Оформить заказ</button>`;
   content.innerHTML = html;
 }
