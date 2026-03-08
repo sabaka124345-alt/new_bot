@@ -24,6 +24,8 @@ const data = await res.json();
 
 cities = data.map(c => c.name);
 
+renderCities(cities);
+
 }
 
 async function loadDistricts(){
@@ -82,7 +84,6 @@ container.appendChild(div);
 
 }
 
-renderCities(cities);
 
 document.getElementById("citySearch").addEventListener("input", function(){
 
