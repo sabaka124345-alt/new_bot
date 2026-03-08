@@ -119,3 +119,20 @@ font-size:16px;
 .category:hover{
 border-color:#00ff9c;
 }
+.product{
+margin-top:12px;
+padding:14px;
+background:#121212;
+border:1px solid #1f1f1f;
+border-radius:10px;
+}
+
+.product-title{
+font-size:16px;
+font-weight:600;
+}
+
+.product-price{
+margin-top:6px;
+color:#00ff9c;
+}
