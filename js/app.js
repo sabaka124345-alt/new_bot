@@ -1,3 +1,4 @@
+let cart = [];
 let products = {};
 let districts = {};
 const tg = window.Telegram.WebApp;
@@ -257,12 +258,69 @@ main.innerHTML = `
 </p>
 
 <button id="buyBtn">Купить</button>
-`;
 
+<button id="cartBtn">Корзина</button>
+`;
 document.getElementById("buyBtn").onclick = () => {
+
+cart.push(product);
 
 alert("Товар добавлен в корзину");
 
 };
 
+document.getElementById("cartBtn").onclick = () => {
+
+openCart();
+
+};
+
 }
+function openCart(){
+
+const main = document.getElementById("main");
+
+main.innerHTML = "<h2>Корзина</h2>";
+ let total = 0;
+cart.forEach(item => {
+  total += parseInt(item.price);
+
+const div = document.createElement("div");
+
+div.innerHTML = `
+<b>${item.name}</b><br>
+${item.weight} — ${item.price}
+`;
+
+div.style.padding = "12px";
+div.style.margin = "10px";
+div.style.background = "#111";
+div.style.border = "1px solid #333";
+
+main.appendChild(div);
+
+});
+
+}
+const totalDiv = document.createElement("div");
+totalDiv.innerHTML = `<h3>Итого: ${total}₽</h3>`;
+main.appendChild(totalDiv);
+
+const orderBtn = document.createElement("button");
+
+orderBtn.innerText = "Оформить заказ";
+
+orderBtn.style.padding = "12px";
+orderBtn.style.margin = "20px";
+orderBtn.style.background = "#222";
+orderBtn.style.color = "#fff";
+orderBtn.style.border = "1px solid #333";
+orderBtn.style.cursor = "pointer";
+
+orderBtn.onclick = () => {
+
+alert("Переход к оплате");
+
+};
+
+main.appendChild(orderBtn);
