@@ -225,6 +225,12 @@ div.innerHTML = `
 ${item.weight} — ${item.price}
 `;
 
+div.onclick = () => {
+
+openProduct(item);
+
+};
+
 div.style.padding = "12px";
 div.style.margin = "10px";
 div.style.background = "#111";
@@ -233,5 +239,30 @@ div.style.border = "1px solid #333";
 main.appendChild(div);
 
 });
+
+}
+function openProduct(product){
+
+const main = document.getElementById("main");
+
+main.innerHTML = `
+<h2>${product.name}</h2>
+
+<p>
+Вес: ${product.weight}
+</p>
+
+<p>
+Цена: ${product.price}
+</p>
+
+<button id="buyBtn">Купить</button>
+`;
+
+document.getElementById("buyBtn").onclick = () => {
+
+alert("Товар добавлен в корзину");
+
+};
 
 }
