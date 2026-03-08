@@ -49,6 +49,18 @@ container.appendChild(div);
 
 renderCities(cities);
 
+document.getElementById("citySearch").addEventListener("input", function(){
+
+const value = this.value.toLowerCase();
+
+const filtered = cities.filter(city =>
+city.toLowerCase().includes(value)
+);
+
+renderCities(filtered);
+
+});
+
 function enterMarket(){
 
 if(!selectedCity){
