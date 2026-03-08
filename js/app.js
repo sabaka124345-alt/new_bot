@@ -6,13 +6,23 @@ console.log("Mini App started");
 
 const user = tg.initDataUnsafe.user;
 
-if (user) {
+if (!user) {
 
-    console.log("User ID:", user.id);
-    console.log("Username:", user.username);
+    document.body.innerHTML = `
+    <div style="display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    background:#0f0f10;
+    color:white;
+    font-size:20px;">
+    Откройте магазин через Telegram
+    </div>
+    `;
 
-} else {
-
-    console.log("Mini App opened outside Telegram");
+    throw new Error("Mini App opened outside Telegram");
 
 }
+
+console.log("User ID:", user.id);
+console.log("Username:", user.username);
