@@ -136,3 +136,42 @@ font-weight:600;
 margin-top:6px;
 color:#00ff9c;
 }
+.info-btn{
+width:100%;
+margin-top:10px;
+padding:10px;
+background:#121212;
+border:1px solid #2a2a2a;
+border-radius:8px;
+color:white;
+cursor:pointer;
+}
+
+.district-btn{
+margin-top:15px;
+width:100%;
+padding:12px;
+background:#121212;
+border:1px solid #00ff9c33;
+border-radius:8px;
+color:#00ff9c;
+cursor:pointer;
+}
+
+.district{
+margin-top:10px;
+padding:12px;
+background:#121212;
+border:1px solid #1f1f1f;
+border-radius:8px;
+cursor:pointer;
+}
+
+.district:hover{
+border-color:#00ff9c;
+}
+
+.disabled{
+opacity:0.4;
+pointer-events:none;
+}
