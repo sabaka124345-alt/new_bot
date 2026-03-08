@@ -88,15 +88,6 @@ renderCategories();
 
 }
 
-document.getElementById("cityGate").style.display="none";
-document.getElementById("main").style.display="block";
-
-document.getElementById("main").innerHTML = `
-<h1>Город: ${selectedCity}</h1>
-<p>Маркет загружен</p>
-`;
-
-}
 function renderCategories(){
 
 const categories = [
