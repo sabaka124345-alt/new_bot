@@ -1,3 +1,6 @@
+let selectedWeight = null;
+let selectedPrice = 0;
+
 const tg = window.Telegram.WebApp;
 
 tg.expand();
@@ -134,12 +137,43 @@ content.innerHTML = `
 Чистый лабораторный кристалл высокой степени.
 </p>
 
+<h3>Выберите фасовку</h3>
+
 <div class="weights">
-<div class="weight">0.5 г — 1200 ₽</div>
-<div class="weight">1 г — 2000 ₽</div>
-<div class="weight">2 г — 3500 ₽</div>
+
+<div class="weight" onclick="selectWeight('0.5',1200)">
+0.5 г — 1200 ₽
 </div>
 
-<button class="buy-btn">Добавить в корзину</button>
+<div class="weight" onclick="selectWeight('1',2000)">
+1 г — 2000 ₽
+</div>
+
+<div class="weight" onclick="selectWeight('2',3500)">
+2 г — 3500 ₽
+</div>
+
+</div>
+
+<button class="buy-btn" onclick="addToCart()">Добавить в корзину</button>
 `;
+
+}
+function selectWeight(weight,price){
+
+selectedWeight = weight;
+selectedPrice = price;
+
+alert("Вы выбрали "+weight+" г");
+
+}
+function addToCart(){
+
+if(!selectedWeight){
+alert("Выберите фасовку");
+return;
+}
+
+alert("Добавлено в корзину: "+selectedWeight+" г");
+
 }
