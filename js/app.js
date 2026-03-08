@@ -30,7 +30,7 @@ renderCities(cities);
 
 async function loadDistricts(){
 
-const res = await fetch("/data/districts.json");
+const res = await fetch("/new_bot/data/cities.json")
 
 districts = await res.json();
 
