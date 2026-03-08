@@ -86,13 +86,38 @@ if(page === "catalog"){
 content.innerHTML = `
 <h2>Каталог</h2>
 
-<div class="category">⚗️ Лаборатория</div>
-<div class="category">🌌 Космос</div>
-<div class="category">🧬 Синтез</div>
-<div class="category">🧊 Кристаллы</div>
-<div class="category">🔥 Эксперименты</div>
+<div class="category" onclick="openCategory('lab')">🔬 Лаборатория</div>
+<div class="category" onclick="openCategory('space')">🌌 Космос</div>
+<div class="category" onclick="openCategory('synthesis')">🧬 Синтез</div>
+<div class="category" onclick="openCategory('crystal')">🧊 Кристаллы</div>
+<div class="category" onclick="openCategory('exp')">🔥 Эксперименты</div>
 `;
 
 }
+
+}
+function openCategory(name){
+
+const content = document.getElementById("content");
+
+content.innerHTML = `
+<h2>Товары</h2>
+
+<div class="product">
+<div class="product-title">Blue Crystal</div>
+<div class="product-price">1200 ₽</div>
+</div>
+
+<div class="product">
+<div class="product-title">Red Powder</div>
+<div class="product-price">950 ₽</div>
+</div>
+
+<div class="product">
+<div class="product-title">Dark Matter</div>
+<div class="product-price">2100 ₽</div>
+</div>
+
+`;
 
 }
